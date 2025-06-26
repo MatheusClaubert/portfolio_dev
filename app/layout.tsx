@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Matheus Claubert.Dev',
-  description: 'Created with v0',
+  description: 'Bora tomar um café ?',
   generator: 'Next.js',
   icons: {
     icon: '/favicon.png', // Certifique-se que esse arquivo existe na pasta /public
