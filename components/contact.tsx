@@ -2,36 +2,13 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Send, Github, Linkedin } from "lucide-react"
+import { Mail, Github, Linkedin, Phone } from "lucide-react"
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Criar link mailto com os dados do formulário
-    const subject = encodeURIComponent(formData.subject || "Contato via Portfolio")
-    const body = encodeURIComponent(
-      `Olá Matheus,\n\nMeu nome é ${formData.name}.\n\n${formData.message}\n\nMeu email para contato: ${formData.email}`,
-    )
-    window.location.href = `mailto:mattheus.hisashi@gmail.com?subject=${subject}&body=${body}`
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent("Oi Matheus! Vim pelo seu portfólio, vamos bater um papo? 😊")
+    window.open(`https://wa.me/5599984612190?text=${message}`, "_blank")
   }
 
   const contactInfo = [
@@ -68,7 +45,7 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="max-w-2xl mx-auto">
           {/* Contact Information */}
           <div className="space-y-6 md:space-y-8">
             <div>
@@ -100,6 +77,17 @@ export function Contact() {
               ))}
             </div>
 
+            {/* WhatsApp Button */}
+            <div className="pt-4 space-y-2">
+              <Button 
+                onClick={handleWhatsApp}
+                className="w-full bg-green-600 hover:bg-green-700 text-white"
+              >
+                <Phone className="h-4 w-4 mr-2" />
+                WhatsApp
+              </Button>
+            </div>
+
             <div className="pt-4 md:pt-8">
               <h4 className="font-semibold mb-4 text-white">Disponibilidade</h4>
               <div className="space-y-2 text-gray-300">
@@ -109,70 +97,8 @@ export function Contact() {
               </div>
             </div>
           </div>
-
-          {/* Contact Form */}
-          <Card className="bg-gray-800 border-gray-700">
-            <CardHeader>
-              <CardTitle className="text-white">Envie uma mensagem</CardTitle>
-              <CardDescription className="text-gray-300">
-                Preencha o formulário abaixo e entrarei em contato o mais breve possível.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Input
-                      name="name"
-                      placeholder="Seu nome"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      name="email"
-                      type="email"
-                      placeholder="Seu email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <Input
-                    name="subject"
-                    placeholder="Assunto"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                  />
-                </div>
-                <div>
-                  <Textarea
-                    name="message"
-                    placeholder="Sua mensagem"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 resize-none"
-                  />
-                </div>
-                <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
-                  <Send className="h-4 w-4 mr-2" />
-                  Enviar mensagem
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </section>
   )
-}
+} 

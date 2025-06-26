@@ -1,17 +1,30 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Github, Linkedin, Mail, MapPin, Download } from "lucide-react"
+import { ArrowRight, Github, Linkedin, Mail, MapPin, Download, Phone } from "lucide-react"
 
 export function Hero() {
   const handleDownloadCV = () => {
-    // Criar um link temporário para download
+    // Criar um link temporário para download direto
     const link = document.createElement("a")
-    link.href = "/curriculo-matheus-claubert.pdf"
-    link.download = "Curriculo-Matheus-Claubert.pdf"
+    link.href = "/CV_Matheus_Claubert.pdf"
+    link.download = "CV_Matheus_Claubert.pdf"
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+  }
+
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent("Oi Matheus! Vim pelo seu portfólio, vamos bater um papo? 😊")
+    window.open(`https://wa.me/5599984612190?text=${message}`, "_blank")
+  }
+
+  const handleViewProjects = () => {
+    // Scroll suave para a seção de projetos
+    const projectsSection = document.getElementById('projects')
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   return (
@@ -36,7 +49,11 @@ export function Hero() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
+              <Button 
+                size="lg" 
+                className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto"
+                onClick={handleViewProjects}
+              >
                 Ver meus projetos
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -48,6 +65,14 @@ export function Hero() {
               >
                 <Download className="mr-2 h-4 w-4" />
                 Download CV
+              </Button>
+              <Button
+                size="lg"
+                className="bg-green-600 hover:bg-green-700 w-full sm:w-auto"
+                onClick={handleWhatsApp}
+              >
+                <Phone className="mr-2 h-4 w-4" />
+                WhatsApp
               </Button>
             </div>
 

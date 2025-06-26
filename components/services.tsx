@@ -1,7 +1,20 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Code, Database, Globe, Cloud } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Code, Database, Globe, Cloud, Download } from "lucide-react"
 
 export function Services() {
+  const handleDownloadCV = () => {
+    // Criar um link temporário para download direto
+    const link = document.createElement("a")
+    link.href = "/CV_Matheus_Claubert.pdf"
+    link.download = "CV_Matheus_Claubert.pdf"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   const services = [
     {
       icon: Globe,
@@ -67,6 +80,18 @@ export function Services() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Download CV Button */}
+        <div className="text-center mt-12">
+          <Button 
+            onClick={handleDownloadCV}
+            size="lg"
+            className="bg-purple-600 hover:bg-purple-700 text-white"
+          >
+            <Download className="h-5 w-5 mr-2" />
+            Baixar Currículo
+          </Button>
         </div>
       </div>
     </section>

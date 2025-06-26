@@ -26,6 +26,7 @@ export function Projects() {
   const [repos, setRepos] = useState<GitHubRepo[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showAllProjects, setShowAllProjects] = useState(false)
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -349,8 +350,8 @@ export function Projects() {
         {otherRepos.length > 0 && (
           <div className="mb-12">
             <h3 className="text-2xl font-bold mb-8 text-white">Outros Projetos</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {otherRepos.map((repo) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {(showAllProjects ? otherRepos : otherRepos.slice(0, 6)).map((repo) => (
                 <Card
                   key={repo.id}
                   className="group hover:shadow-lg transition-all duration-300 bg-gray-800 border-gray-700 hover:-translate-y-1 cursor-pointer"
@@ -398,6 +399,29 @@ export function Projects() {
                 </Card>
               ))}
             </div>
+
+            {/* Botão para ver mais projetos */}
+            {otherRepos.length > 6 && (
+              <div className="text-center mt-8">
+                <Button
+                  onClick={() => setShowAllProjects(!showAllProjects)}
+                  variant="outline"
+                  className="bg-purple-600 hover:bg-purple-700 text-white border-purple-600 hover:border-purple-700 font-semibold py-3 px-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
+                >
+                  {showAllProjects ? (
+                    <>
+                      <Eye className="h-5 w-5 mr-2" />
+                      Ver menos projetos
+                    </>
+                  ) : (
+                    <>
+                      <Eye className="h-5 w-5 mr-2" />
+                      Ver mais {otherRepos.length - 6} projetos
+                    </>
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
         )}
 

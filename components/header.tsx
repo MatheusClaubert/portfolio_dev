@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Code2 } from "lucide-react"
+import { Menu, X, Code2, Download, Phone } from "lucide-react"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -16,6 +16,21 @@ export function Header() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const handleDownloadCV = () => {
+    // Download direto automático
+    const link = document.createElement("a")
+    link.href = "/CV_Matheus_Claubert.pdf"
+    link.download = "CV_Matheus_Claubert.pdf"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent("Oi Matheus! Vim pelo seu portfólio, vamos bater um papo? 😊")
+    window.open(`https://wa.me/5599984612190?text=${message}`, "_blank")
+  }
 
   const navItems = [
     { href: "#about", label: "Sobre" },
@@ -56,10 +71,16 @@ export function Header() {
               variant="outline"
               size="sm"
               className="bg-transparent text-purple-400 border-purple-500 hover:bg-purple-500 hover:text-white text-xs xl:text-sm"
+              onClick={handleDownloadCV}
             >
+              <Download className="h-3 w-3 mr-1" />
               Download CV
             </Button>
-            <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-xs xl:text-sm">
+            <Button 
+              size="sm" 
+              className="bg-purple-600 hover:bg-purple-700 text-xs xl:text-sm"
+              onClick={handleWhatsApp}
+            >
               Vamos conversar
             </Button>
           </div>
@@ -95,10 +116,16 @@ export function Header() {
                   variant="outline"
                   size="sm"
                   className="bg-transparent text-purple-400 border-purple-500 hover:bg-purple-500 hover:text-white text-xs"
+                  onClick={handleDownloadCV}
                 >
+                  <Download className="h-3 w-3 mr-1" />
                   Download CV
                 </Button>
-                <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-xs">
+                <Button 
+                  size="sm" 
+                  className="bg-purple-600 hover:bg-purple-700 text-xs"
+                  onClick={handleWhatsApp}
+                >
                   Vamos conversar
                 </Button>
               </div>

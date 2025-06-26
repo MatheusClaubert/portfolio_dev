@@ -22,7 +22,7 @@ export function Footer() {
     social: [
       { name: "GitHub", href: "https://github.com/MatheusClaubert", icon: Github },
       { name: "LinkedIn", href: "https://www.linkedin.com/in/matheus-claubert/", icon: Linkedin },
-      { name: "Instagram", href: "#", icon: Instagram },
+      { name: "Instagram", href: "https://www.instagram.com/dart.siders_", icon: Instagram },
       { name: "Email", href: "mailto:mattheus.hisashi@gmail.com", icon: Mail },
     ],
   }

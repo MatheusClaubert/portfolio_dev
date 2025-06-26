@@ -1,6 +1,9 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Code, Briefcase, GraduationCap, Zap } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Code, Briefcase, GraduationCap, Zap, Download } from "lucide-react"
 
 export function About() {
   const skills = [
@@ -47,6 +50,16 @@ export function About() {
     },
   ]
 
+  const handleDownloadCV = () => {
+    // Criar um link temporário para download direto
+    const link = document.createElement("a")
+    link.href = "/CV_Matheus_Claubert.pdf"
+    link.download = "CV_Matheus_Claubert.pdf"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <section id="about" className="py-16 md:py-20 bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,6 +92,17 @@ export function About() {
             </div>
             <div className="flex items-center space-x-4 text-gray-300 pt-2">
               <span>☕ Vai um café aí? Sempre aberto para networking!</span>
+            </div>
+            
+            {/* Download CV Button */}
+            <div className="pt-4">
+              <Button 
+                onClick={handleDownloadCV}
+                className="bg-purple-600 hover:bg-purple-700 text-white"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Baixar Currículo
+              </Button>
             </div>
           </div>
 
